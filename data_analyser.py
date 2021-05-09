@@ -1,11 +1,17 @@
+"""
+Used to generate diagrams from student feedback in the course TDT4140 at NTNU
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from openpyxl import load_workbook
 
-NUMBER_OF_RESPONSES = 148
+NUMBER_OF_RESPONSES = 142
 NUMBER_OF_ROWS = NUMBER_OF_RESPONSES + 1
 
-wb = load_workbook(filename='./../results_iterasjon_1.xlsx')
+wb = load_workbook(filename='./../results_iterasjon_2.xlsx')
+RESULTS_DIR = './../diagrams/iterasjon2'
+
 
 sheet = wb.active
 
@@ -37,7 +43,7 @@ def plot_hours_spent(*columns):
         plt, title = plot_diagram(column, 1, 20+1)
 
         plt.xlabel('Antall timer')
-        plt.savefig(f'./../diagrams/hours/{title.replace(" ", "_").lower()}_bar.png')
+        plt.savefig(f'{RESULTS_DIR}/hours/{title.replace(" ", "_").lower()}_bar.png')
         plt.close()
 
 def plot_satisfaction(*columns):
@@ -46,7 +52,7 @@ def plot_satisfaction(*columns):
         plt, title = plot_diagram(column, 1, 5+1)
 
         plt.xlabel('1=Ikke tilfreds | 5=Svært tilfreds')
-        plt.savefig(f'./../diagrams/satisfaction/{title.replace(" ", "_").lower()}_bar.png')
+        plt.savefig(f'{RESULTS_DIR}/satisfaction/{title.replace(" ", "_").lower()}_bar.png')
         plt.close()
 
 
@@ -56,7 +62,7 @@ def plot_agreement(*columns):
         plt, title = plot_diagram(column, 1, 5+1)
 
         plt.xlabel('1=Helt uenig | 5=Helt enig')
-        plt.savefig(f'./../diagrams/agreement/{title.replace(" ", "_").lower()}_bar.png')
+        plt.savefig(f'{RESULTS_DIR}/agreement/{title.replace(" ", "_").lower()}_bar.png')
         plt.close()
 
 
@@ -80,16 +86,14 @@ def plot_diagram(column, x_low, x_high):
 if __name__ == '__main__':
      
     # Questions about Hours spent
-    columns_for_hours = ['D', 'E']
+    # columns_for_hours = ['D', 'E']
     # plot_hours_spent(*columns_for_hours)
-    plot_hours_spent(*columns_for_hours)
     
     # Questions about Satisfaction
-    columns_for_satisfaction = ['F', 'G']
-    # plot_satisfaction(*columns_for_satisfaction)
+    # columns_for_satisfaction = ['F', 'G']
+    columns_for_satisfaction = ['BK']
     plot_satisfaction(*columns_for_satisfaction)
 
     # Questions about Agreement
-    columns_for_agreement = ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y']
+    # columns_for_agreement = ['H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X']
     # plot_agreement(*columns_for_agreement)
-    plot_agreement(*columns_for_agreement)
